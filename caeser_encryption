@@ -1,12 +1,10 @@
 #include<stdio.h>
-#include<conio.h>
 #include<string.h>
 #include<ctype.h>
 void main()
 {
     int i, key;
     char text[100], c;
-    clrscr();
     printf("\nCaesar Cipher - Encryption");
     printf("\nEnter Message To Encrypt : ");
     gets(text);
