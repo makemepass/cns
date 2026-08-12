@@ -1,0 +1,27 @@
+import java.security.*;
+import javax.crypto.*;
+import javax.crypto.spec.*;
+import java.util.Scanner;
+
+public class AES {
+    
+    public static void main(String[] args) throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input your message: ");
+        String message = scanner.nextLine();
+        KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        kgen.init(128); 
+        SecretKey skey = kgen.generateKey();
+        byte[] raw = skey.getEncoded();
+        SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+        byte[] encrypted = cipher.doFinal(message.getBytes());
+        System.out.println("\nEncrypted text: " + new String(encrypted));
+        cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+        byte[] original = cipher.doFinal(encrypted);
+        String originalString = new String(original);
+        System.out.println("\nDecrypted text: " + originalString);
+        scanner.close();
+    }
+}
