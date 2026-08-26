@@ -4,33 +4,30 @@
 void main()
 {
     int i, key;
-    char text[100], c;
+    char text[100]; 
     printf("\nCaesar Cipher - Encryption");
     printf("\nEnter Message To Encrypt : ");
-    gets(text);
-    printf("\nEnter Key : ");
+    fgets(text, sizeof(text), stdin);
+    printf("Enter Key : ");
     scanf("%d", &key);
     for(i=0; text[i]!='\0'; ++i)
     {
-        c = text[i];
-        if(c >= 'a' && c <= 'z')
+        if(text[i] >= 'a' && text[i] <= 'z')
         {
-            c = c + key;
-            if(c > 'z')
+            text[i] = text[i] + key;
+            if(text[i] > 'z')
             {
-                c = c - 'z' + 'a' - 1;
+                text[i] = text[i] - 'z' + 'a' - 1;
             }
-            text[i] = c;
         }
-        else if(c >= 'A' && c <= 'Z')
+        else if(text[i] >= 'A' && text[i] <= 'Z')
         {
-            c = c + key;
-            if(c > 'Z')
+            text[i] = text[i] + key;
+            if(text[i] > 'Z')
             {
-                c = c - 'Z' + 'A' - 1;
+                text[i] = text[i] - 'Z' + 'A' - 1;
             }
-            text[i] = c;
         }
     }
-    printf("\nEncrypted Message : %s", text);
+    printf("\nEncrypted Message : %s\n", text);
 }
