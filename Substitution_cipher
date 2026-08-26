@@ -1,0 +1,92 @@
+#include <stdio.h>
+int main()
+{
+    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    char key[]      = "QWERTYUIOPASDFGHJKLZXCVBNM";
+    char text[100];
+    char result[100];
+    int choice;
+    int i, j;
+    printf("SUBSTITUTION CIPHER\n");
+    printf("-------------------\n");
+    printf("1. Encryption\n");
+    printf("2. Decryption\n");
+    printf("Enter your choice: ");
+    scanf("%d", &choice);
+    getchar();
+    printf("Enter message: ");
+    fgets(text, sizeof(text), stdin);
+    if (choice == 1)
+    {
+        for (i = 0; text[i] != '\0'; i++)
+        {
+            if (text[i] >= 'A' && text[i] <= 'Z')
+            {
+                for (j = 0; j < 26; j++)
+                {
+                    if (text[i] == alphabet[j])
+                    {
+                        result[i] = key[j];
+                        break;
+                    }
+                }
+            }
+            else if (text[i] >= 'a' && text[i] <= 'z')
+            {
+                for (j = 0; j < 26; j++)
+                {
+                    if (text[i] == alphabet[j] + ('a' - 'A'))
+                    {
+                        result[i] = key[j] + ('a' - 'A');
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                result[i] = text[i];
+            }
+        }
+        result[i] = '\0';
+        printf("\nEncrypted text: %s", result);
+    }
+    else if (choice == 2)
+    {
+        for (i = 0; text[i] != '\0'; i++)
+        {
+            if (text[i] >= 'A' && text[i] <= 'Z')
+            {
+                for (j = 0; j < 26; j++)
+                {
+                    if (text[i] == key[j])
+                    {
+                        result[i] = alphabet[j];
+                        break;
+                    }
+                }
+            }
+            else if (text[i] >= 'a' && text[i] <= 'z')
+            {
+                for (j = 0; j < 26; j++)
+                {
+                    if (text[i] == key[j] + ('a' - 'A'))
+                    {
+                        result[i] = alphabet[j] + ('a' - 'A');
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                result[i] = text[i];
+            }
+        }
+        result[i] = '\0';
+        printf("\nDecrypted text: %s", result);
+    }
+    else
+    {
+        printf("\nInvalid choice!");
+    }
+    return 0;
+}
