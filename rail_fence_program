@@ -7,7 +7,6 @@ int main()
     printf("\n\t\t RAIL FENCE TECHNIQUE");
     printf("\n\nEnter the input string : ");
     fgets(a, sizeof(a), stdin);
-    a[strcspn(a, "\n")] = 0;
     l = strlen(a);
     /* Ciphering */
     for(i = 0, j = 0; i < l; i++)
