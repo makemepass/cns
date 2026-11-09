@@ -1,21 +1,36 @@
 #include <stdio.h>
 int main() {
-    int a[3][3] = {{6, 24, 1}, {13, 16, 10}, {20, 17, 15}};
-    int b[3][3] = {{8, 5, 10}, {21, 8, 21}, {21, 12, 8}};
-    int i, j, t, c[3], d[3];
-    char msg[4];
-    printf("Enter 3 uppercase letters: ");
-    scanf("%3s", msg);
-    for(i = 0; i < 3; i++) c[i] = msg[i] - 'A';
-    printf("Encrypted: ");
-    for(i = 0; i < 3; i++) {
-        for(t = 0, j = 0; j < 3; j++) t += a[i][j] * c[j];
-        printf("%c", (t % 26) + 'A');
+    int mat[3][3] = { { 3, 0, 0 },{ 0, 3, 0 },{ 0, 0, 3 } };
+    int inv_mat[3][3] = { { 9, 0, 0 },{ 0, 9, 0 },{ 0, 0, 9 } };
+    printf("Enter msg: ");
+    char str[4], enc[4], dec[4];
+    scanf("%3s", str);
+    for (int i = 0; i < 3; i++) {
+        str[i] -= 'A';
     }
-    printf("\nDecrypted: ");
-    for(i = 0; i < 3; i++) {
-        for(t = 0, j = 0; j < 3; j++) t += b[i][j] * d[j];
-        printf("%c", (t % 26) + 'A');
+    for (int i = 0; i < 3; i++) {
+        int elem = 0;
+        for (int j = 0; j < 3; j++) {
+            elem += (mat[i][j] * str[j]);
+        }
+        enc[i] = (elem % 26);
     }
-    return 0;
+    for (int i = 0; i < 3; i++) {
+        enc[i] += 'A';
+    }
+    printf("Encyrpted: %s\n", enc);
+    for (int i = 0; i < 3; i++) {
+        enc[i] -= 'A';
+    }
+    for (int i = 0; i < 3; i++) {
+        int elem = 0;
+        for (int j = 0; j < 3; j++) {
+            elem += (inv_mat[i][j] * enc[j]);
+        }
+        dec[i] = (elem % 26);
+    }
+    for (int i = 0; i < 3; i++) {
+        dec[i] += 'A';
+    }
+    printf("Decrypted: %s", dec);
 }
