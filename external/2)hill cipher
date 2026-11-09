@@ -10,8 +10,7 @@ int main() {
     printf("Encrypted: ");
     for(i = 0; i < 3; i++) {
         for(t = 0, j = 0; j < 3; j++) t += a[i][j] * c[j];
-        d[i] = t % 26;
-        printf("%c", d[i] + 'A');
+        printf("%c", (t % 26) + 'A');
     }
     printf("\nDecrypted: ");
     for(i = 0; i < 3; i++) {
