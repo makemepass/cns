@@ -1,0 +1,32 @@
+#include <stdio.h>
+int main() {
+    int i, key, choice;
+    char text[100];
+    printf("Enter Message: ");
+    fgets(text, sizeof(text), stdin);
+    printf("Enter Key: ");
+    scanf("%d", &key);
+    printf("Enter 1 for Encryption, 2 for Decryption: ");
+    scanf("%d", &choice);
+    for(i = 0; text[i] != '\0'; ++i) {
+        if(text[i] >= 'a' && text[i] <= 'z') {
+            if(choice == 1) {
+                text[i] = text[i] + key;
+                if(text[i] > 'z') text[i] = text[i] - 26;
+            } else {
+                text[i] = text[i] - key;
+                if(text[i] < 'a') text[i] = text[i] + 26;
+            }
+        } else if(text[i] >= 'A' && text[i] <= 'Z') {
+            if(choice == 1) {
+                text[i] = text[i] + key;
+                if(text[i] > 'Z') text[i] = text[i] - 26;
+            } else {
+                text[i] = text[i] - key;
+                if(text[i] < 'A') text[i] = text[i] + 26;
+            }
+        }
+    }
+    printf("\nResult: %s", text);
+    return 0;
+}
