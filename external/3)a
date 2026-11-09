@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main()
+{
+    char key[] = "QWERTYUIOPASDFGHJKLZXCVBNM";
+    char text[100];
+    int choice, i;
+    printf("1. Encryption\n2. Decryption\nEnter choice: ");
+    scanf("%d", &choice);
+    getchar(); 
+    printf("Enter message: ");
+    fgets(text, sizeof(text), stdin);
+    for (i = 0; text[i] != '\0'; i++)
+    {
+        if (isalpha(text[i])) 
+        {
+            int is_low = islower(text[i]);  
+            char upper_c = toupper(text[i]); 
+            if (choice == 1) {
+                text[i] = key[upper_c - 'A'];
+            } 
+            else if (choice == 2) {
+                text[i] = 'A' + (strchr(key, upper_c) - key); 
+            }
+            if (is_low) {
+                text[i] = tolower(text[i]);
+            }
+        }
+    }
+    printf("\nResulting text: %s", text);
+    return 0;
+}
