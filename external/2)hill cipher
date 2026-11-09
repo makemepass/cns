@@ -1,0 +1,22 @@
+#include <stdio.h>
+int main() {
+    int a[3][3] = {{6, 24, 1}, {13, 16, 10}, {20, 17, 15}};
+    int b[3][3] = {{8, 5, 10}, {21, 8, 21}, {21, 12, 8}};
+    int i, j, t, c[3], d[3];
+    char msg[4];
+    printf("Enter 3 uppercase letters: ");
+    scanf("%3s", msg);
+    for(i = 0; i < 3; i++) c[i] = msg[i] - 'A';
+    printf("Encrypted: ");
+    for(i = 0; i < 3; i++) {
+        for(t = 0, j = 0; j < 3; j++) t += a[i][j] * c[j];
+        d[i] = t % 26;
+        printf("%c", d[i] + 'A');
+    }
+    printf("\nDecrypted: ");
+    for(i = 0; i < 3; i++) {
+        for(t = 0, j = 0; j < 3; j++) t += b[i][j] * d[j];
+        printf("%c", (t % 26) + 'A');
+    }
+    return 0;
+}
